@@ -1,0 +1,363 @@
+---
+import MarketingLayout from '../layouts/MarketingLayout.astro';
+import aptosLogo from '../assets/aptos.svg';
+import movemakerLogo from '../assets/movemaker.svg';
+import Squares from '../components/Squares.astro';
+import DecryptedText from '../components/DecryptedText.astro';
+---
+
+<MarketingLayout title="MoveWave - Aptos Move 开发门户">
+  <!-- Hero Section -->
+  <section class="pt-20 pb-16 md:pt-24 md:pb-20 overflow-hidden relative bg-transparent">
+    <Squares 
+      direction="diagonal" 
+      speed={0.5} 
+      squareSize={40} 
+      borderColor="rgba(139, 92, 246, 0.2)" 
+      hoverFillColor="rgba(139, 92, 246, 0.1)"
+      maxHeight={800}
+    />
+    <div class="container-custom relative z-10">
+      <div class="flex flex-col items-center text-center">
+        <div class="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-purple-50 border border-purple-100 text-purple-700 text-sm font-medium mb-6 animate-on-scroll delay-0">
+          <span class="relative flex h-2 w-2">
+            <span class="animate-ping absolute inline-flex h-full w-full rounded-full bg-purple-400 opacity-75"></span>
+            <span class="relative inline-flex rounded-full h-2 w-2 bg-purple-500"></span>
+          </span>
+          Aptos Move Cookbook 现已发布
+        </div>
+        
+        <h1 class="animate-on-scroll text-balance mb-6 delay-0 text-5xl md:text-7xl font-bold font-heading leading-tight text-gray-900 tracking-tight">
+           构建下一代 <br class="hidden md:block" />
+           <span class="gradient-text">Web3 智能合约</span>
+        </h1>
+        
+        <p class="animate-on-scroll delay-1 mb-8 text-xl text-gray-600 max-w-2xl mx-auto leading-relaxed">
+          <DecryptedText 
+            text="Learn Move. Build Waves." 
+            speed={60}
+            maxIterations={10}
+            sequential={true}
+            revealDirection="start"
+            animateOn="view"
+            className="text-xl text-gray-600"
+            initialDelay={500}
+          />
+        </p>
+        
+        <div class="animate-on-scroll delay-2 flex flex-col sm:flex-row items-center gap-6 justify-center w-full sm:w-auto">
+          <a href="https://cookbook.movewave.dev" target="_blank" class="btn btn-primary flex items-center justify-center gap-2">
+            开始学习
+          </a>
+          <button type="button" class="btn btn-secondary relative group overflow-visible" aria-label="查看视频（即将推出）">
+            查看视频
+            <span class="absolute -top-3 -right-3 bg-[#FF0000] text-white text-[10px] sm:text-[12px] rounded-md px-1.5 py-0.5 leading-none shadow-sm transform group-hover:scale-110 transition-transform duration-200 whitespace-nowrap z-20">
+              即将推出
+            </span>
+          </button>
+        </div>
+      </div>
+
+      <!-- Tech Stack / Partners -->
+      <div class="mt-16 pt-8 border-t border-gray-100 animate-on-scroll delay-3">
+        <p class="text-center text-sm text-gray-400 mb-6 font-medium tracking-wide uppercase">Partners</p>
+        <div class="flex flex-wrap justify-center items-center gap-6 md:gap-10 opacity-70 grayscale hover:grayscale-0 transition-all duration-500">
+          <img src={aptosLogo.src} alt="Aptos" class="h-6 w-28 md:h-7 md:w-32 object-contain" />
+          <img src={movemakerLogo.src} alt="MoveMaker" class="h-8 w-36 md:h-10 md:w-44 object-contain" />
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Feature Grid: Why Aptos Move? -->
+  <section class="py-20 bg-gray-50">
+    <div class="container-custom">
+      <div class="text-center max-w-3xl mx-auto mb-16">
+        <h2 class="animate-on-scroll delay-0 text-3xl md:text-4xl font-bold text-gray-900 mb-4">
+          为资产而生的编程语言
+        </h2>
+        <p class="animate-on-scroll delay-1 text-lg text-gray-600">
+          Move 语言不仅仅是代码，它是数字资产的物理定律。Aptos 框架赋予了它前所未有的并发能力与灵活性。
+        </p>
+      </div>
+
+      <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+        <!-- Feature 1 -->
+        <div class="bg-white p-8 rounded-2xl shadow-sm border border-gray-100 hover:shadow-md transition-shadow animate-on-scroll delay-2">
+          <div class="w-12 h-12 bg-blue-100 rounded-lg flex items-center justify-center mb-6 text-blue-600">
+            <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 11H5m14 0a2 2 0 012 2v6a2 2 0 01-2 2H5a2 2 0 01-2-2v-6a2 2 0 012-2m14 0V9a2 2 0 00-2-2M5 11V9a2 2 0 012-2m0 0V5a2 2 0 012-2h6a2 2 0 012 2v2M7 7h10"></path></svg>
+          </div>
+          <h3 class="text-xl font-bold text-gray-900 mb-3">资源导向编程</h3>
+          <p class="text-gray-600 leading-relaxed">
+            Move 中的资产（Resource）不能被复制或丢弃，只能在账户间安全转移。彻底杜绝重入攻击与无限增发漏洞。
+          </p>
+        </div>
+
+        <!-- Feature 2 -->
+        <div class="bg-white p-8 rounded-2xl shadow-sm border border-gray-100 hover:shadow-md transition-shadow animate-on-scroll delay-3">
+          <div class="w-12 h-12 bg-purple-100 rounded-lg flex items-center justify-center mb-6 text-purple-600">
+            <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z"></path></svg>
+          </div>
+          <h3 class="text-xl font-bold text-gray-900 mb-3">Block-STM 并行执行</h3>
+          <p class="text-gray-600 leading-relaxed">
+            Aptos 的并行执行引擎能够自动检测交易依赖，实现高达 160k TPS 的吞吐量，让你的 dApp 丝般顺滑。
+          </p>
+        </div>
+
+        <!-- Feature 3 -->
+        <div class="bg-white p-8 rounded-2xl shadow-sm border border-gray-100 hover:shadow-md transition-shadow animate-on-scroll delay-4">
+          <div class="w-12 h-12 bg-green-100 rounded-lg flex items-center justify-center mb-6 text-green-600">
+            <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 7v10c0 2.21 3.582 4 8 4s8-1.79 8-4V7M4 7c0 2.21 3.582 4 8 4s8-1.79 8-4M4 7c0-2.21 3.582-4 8-4s8 1.79 8 4m0 5c0 2.21-3.582 4-8 4s-8-1.79-8-4"></path></svg>
+          </div>
+          <h3 class="text-xl font-bold text-gray-900 mb-3">Object 对象模型</h3>
+          <p class="text-gray-600 leading-relaxed">
+            Move 2 引入了更灵活的对象模型。支持可组合 NFT、灵魂绑定代币（SBT）以及无需私钥管理的资源账户。
+          </p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Code Comparison Section -->
+  <section id="code-preview" class="py-20 bg-white overflow-hidden">
+    <div class="container-custom">
+      <div class="flex flex-col lg:flex-row items-center gap-12 lg:gap-20">
+        <!-- Left: Explanation -->
+        <div class="lg:w-1/2 animate-on-scroll delay-0">
+          <h2 class="text-3xl md:text-4xl font-bold text-gray-900 mb-6">
+            所见即所得的<br/><span class="text-payflo-purple">资产安全性</span>
+          </h2>
+          <div class="space-y-6">
+            <div class="flex gap-4">
+              <div class="flex-shrink-0 w-6 h-6 rounded-full bg-green-100 text-green-600 flex items-center justify-center mt-1">✓</div>
+              <div>
+                <h4 class="font-bold text-gray-900">结构体能力 (Abilities)</h4>
+                <p class="text-gray-600 text-sm mt-1">通过 `key` 和 `store` 等关键字，显式定义资产是否可以被存储、复制或丢弃。</p>
+              </div>
+            </div>
+            <div class="flex gap-4">
+              <div class="flex-shrink-0 w-6 h-6 rounded-full bg-green-100 text-green-600 flex items-center justify-center mt-1">✓</div>
+              <div>
+                <h4 class="font-bold text-gray-900">全局存储 (Global Storage)</h4>
+                <p class="text-gray-600 text-sm mt-1">Move 资产直接存储在用户的账户地址下，而不是合约的映射表中，真正实现资产归属。</p>
+              </div>
+            </div>
+            <div class="mt-8">
+               <a href="https://cookbook.movewave.dev/chapters/chapter-2" class="text-payflo-purple font-medium hover:underline inline-flex items-center gap-1">
+                 深入了解 Move 语法 <span aria-hidden="true">&rarr;</span>
+               </a>
+            </div>
+          </div>
+        </div>
+
+        <!-- Right: Code Block -->
+        <div class="lg:w-1/2 w-full animate-on-scroll delay-2">
+          <div class="rounded-xl overflow-hidden shadow-2xl bg-[#1e1e1e] border border-gray-800 transform rotate-1 hover:rotate-0 transition-transform duration-500">
+            <div class="flex items-center gap-2 px-4 py-3 bg-[#252526] border-b border-gray-700">
+              <div class="w-3 h-3 rounded-full bg-red-500"></div>
+              <div class="w-3 h-3 rounded-full bg-yellow-500"></div>
+              <div class="w-3 h-3 rounded-full bg-green-500"></div>
+              <span class="ml-2 text-xs text-gray-400 font-mono">MyAsset.move</span>
+            </div>
+            <div class="p-4 overflow-x-auto">
+              <pre class="font-mono text-sm leading-relaxed text-gray-300"><code><span class="text-purple-400">module</span> <span class="text-yellow-300">0x1</span>::<span class="text-yellow-300">MyAsset</span> &#123;
+    <span class="text-purple-400">use</span> <span class="text-blue-300">std</span>::<span class="text-blue-300">string</span>;
+    <span class="text-purple-400">use</span> <span class="text-blue-300">aptos_framework</span>::<span class="text-blue-300">object</span>;
+
+    <span class="text-gray-500">// 定义资产能力：可存储，拥有唯一键值</span>
+    <span class="text-purple-400">struct</span> <span class="text-yellow-300">DigitalAsset</span> <span class="text-purple-400">has</span> key, store &#123;
+        name: string::String,
+        rarity: u8,
+    &#125;
+
+    <span class="text-purple-400">public entry fun</span> <span class="text-blue-300">create</span>(caller: &<span class="text-green-400">signer</span>) &#123;
+        <span class="text-purple-400">let</span> asset = <span class="text-yellow-300">DigitalAsset</span> &#123;
+            name: string::<span class="text-blue-300">utf8</span>(<span class="text-orange-300">b"MoveWave"</span>),
+            rarity: <span class="text-purple-300">1</span>
+        &#125;;
+        <span class="text-gray-500">// 资产直接转移到调用者账户</span>
+        <span class="text-blue-300">move_to</span>(caller, asset);
+    &#125;
+&#125;</code></pre>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Use Cases -->
+  <section class="py-20 bg-gray-50">
+    <div class="container-custom">
+      <div class="text-center mb-16">
+        <h2 class="text-3xl font-bold text-gray-900">实战场景</h2>
+        <p class="mt-4 text-gray-600">从理论到实践，MoveWave 涵盖了 Web3 开发的核心赛道。</p>
+      </div>
+      
+      <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+        <!-- Card 1 -->
+        <a href="https://cookbook.movewave.dev/chapters/chapter-6" class="group block bg-white rounded-xl overflow-hidden shadow-sm hover:shadow-xl transition-all duration-300 transform hover:-translate-y-1">
+          <div class="h-2 bg-gradient-to-r from-pink-500 to-rose-500"></div>
+          <div class="p-6">
+            <h3 class="font-bold text-xl text-gray-900 group-hover:text-rose-600 transition-colors mb-2">同质化代币 (FA)</h3>
+            <p class="text-sm text-gray-600 mb-4">基于 Aptos Fungible Asset 标准，构建下一代 DeFi 协议与 MEME 币。</p>
+            <span class="text-xs font-mono bg-gray-100 text-gray-600 px-2 py-1 rounded">DeFi</span>
+          </div>
+        </a>
+
+        <!-- Card 2 -->
+        <a href="https://cookbook.movewave.dev/chapters/chapter-7" class="group block bg-white rounded-xl overflow-hidden shadow-sm hover:shadow-xl transition-all duration-300 transform hover:-translate-y-1">
+          <div class="h-2 bg-gradient-to-r from-purple-500 to-indigo-500"></div>
+          <div class="p-6">
+            <h3 class="font-bold text-xl text-gray-900 group-hover:text-indigo-600 transition-colors mb-2">数字资产 (NFT)</h3>
+            <p class="text-sm text-gray-600 mb-4">掌握 Digital Asset 标准，实现批量铸造、灵魂绑定与可组合 NFT。</p>
+            <span class="text-xs font-mono bg-gray-100 text-gray-600 px-2 py-1 rounded">GameFi</span>
+          </div>
+        </a>
+
+        <!-- Card 3 -->
+        <a href="https://cookbook.movewave.dev/chapters/chapter-8" class="group block bg-white rounded-xl overflow-hidden shadow-sm hover:shadow-xl transition-all duration-300 transform hover:-translate-y-1">
+          <div class="h-2 bg-gradient-to-r from-cyan-500 to-blue-500"></div>
+          <div class="p-6">
+            <h3 class="font-bold text-xl text-gray-900 group-hover:text-blue-600 transition-colors mb-2">去中心化应用 (dApp)</h3>
+            <p class="text-sm text-gray-600 mb-4">整合前端与合约，构建功能完整的众筹平台与 DAO 治理系统。</p>
+            <span class="text-xs font-mono bg-gray-100 text-gray-600 px-2 py-1 rounded">SocialFi</span>
+          </div>
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <!-- CTA Section -->
+  <section class="py-24 relative overflow-hidden cta-section">
+    <div class="absolute top-0 right-0 w-64 h-64 bg-purple-500 rounded-full mix-blend-multiply filter blur-3xl opacity-20 animate-blob"></div>
+    <div class="absolute bottom-0 left-0 w-64 h-64 bg-blue-500 rounded-full mix-blend-multiply filter blur-3xl opacity-20 animate-blob animation-delay-2000"></div>
+    
+    <div class="container-custom relative text-center">
+      <h2 class="text-3xl md:text-5xl font-bold mb-6 cta-title">准备好烹饪你的第一个合约了吗？</h2>
+      <p class="text-xl mb-10 max-w-4xl mx-auto cta-description">
+        加入 MoveWave 社区，按照我们的"食谱"指引，从零基础晋升为 Move 开发专家。
+      </p>
+      <div class="flex flex-col sm:flex-row gap-4 justify-center items-center">
+        <a href="https://cookbook.movewave.dev" target="_blank" class="cta-btn cta-btn-primary" aria-label="Read the MoveWave Cookbook">
+          阅读 Cookbook
+        </a>
+        <a href="https://github.com/movewave" target="_blank" class="cta-btn cta-btn-secondary cta-btn-icon" aria-label="Visit MoveWave GitHub Repository">
+          <svg viewBox="0 0 24 24" aria-hidden="true" fill="currentColor" width="24" height="24">
+            <path d="M12 2C6.477 2 2 6.484 2 12.017c0 4.425 2.865 8.18 6.839 9.504.5.092.682-.217.682-.483 0-.237-.008-.868-.013-1.703-2.782.605-3.369-1.343-3.369-1.343-.454-1.158-1.11-1.466-1.11-1.466-.908-.62.069-.608.069-.608 1.003.07 1.531 1.032 1.531 1.032.892 1.53 2.341 1.088 2.91.832.092-.647.35-1.088.636-1.338-2.22-.253-4.555-1.113-4.555-4.951 0-1.093.39-1.988 1.029-2.688-.103-.253-.446-1.272.098-2.65 0 0 .84-.27 2.75 1.026A9.564 9.564 0 0112 6.844c.85.004 1.705.115 2.504.337 1.909-1.296 2.747-1.027 2.747-1.027.546 1.379.202 2.398.1 2.651.64.7 1.028 1.595 1.028 2.688 0 3.848-2.339 4.695-4.566 4.943.359.309.678.92.678 1.855 0 1.338-.012 2.419-.012 2.747 0 .268.18.58.688.482A10.019 10.019 0 0022 12.017C22 6.484 17.522 2 12 2z"></path>
+          </svg>
+        </a>
+        <a href="https://x.com/movewavedev" target="_blank" class="cta-btn cta-btn-secondary cta-btn-icon" aria-label="Follow MoveWave on X">
+          <svg viewBox="0 0 24 24" aria-hidden="true" fill="currentColor" width="24" height="24">
+            <path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z"></path>
+          </svg>
+        </a>
+      </div>
+    </div>
+  </section>
+</MarketingLayout>
+
+<style>
+  .cta-section {
+    /* Light Mode Variables (Default) */
+    --cta-bg-color: #E6E6FA; /* Lavender */
+    --cta-text-primary: #4B0082; /* Indigo */
+    --cta-text-secondary: #1F2937; /* Gray 800 */
+    
+    /* Button Base */
+    --btn-padding: 1rem 2rem;
+    --btn-icon-padding: 0.75rem; /* Specific padding for icon buttons */
+    --btn-radius: 0.5rem;
+    --btn-font-weight: 700;
+    
+    /* Primary Button */
+    --btn-primary-text: #FFFFFF;
+    --btn-primary-gradient-start: #4B0082;
+    --btn-primary-gradient-end: #8A2BE2;
+    
+    /* Secondary Button */
+    --btn-secondary-text: #4B0082;
+    --btn-secondary-border: #4B0082;
+    --btn-secondary-gradient-start: rgba(255, 255, 255, 0.4);
+    --btn-secondary-gradient-end: rgba(255, 255, 255, 0.7);
+
+    background-color: var(--cta-bg-color);
+    color: var(--cta-text-primary);
+    transition: background-color 0.3s ease, color 0.3s ease;
+  }
+
+  /* Dark Mode Support */
+  @media (prefers-color-scheme: dark) {
+    .cta-section {
+      --cta-bg-color: #1F1F35; /* Dark Indigo/Gray */
+      --cta-text-primary: #E6E6FA;
+      --cta-text-secondary: #D1D5DB;
+      
+      --btn-primary-text: #4B0082;
+      --btn-primary-gradient-start: #E6E6FA;
+      --btn-primary-gradient-end: #D8BFD8;
+      
+      --btn-secondary-text: #E6E6FA;
+      --btn-secondary-border: rgba(230, 230, 250, 0.3);
+      --btn-secondary-gradient-start: rgba(255, 255, 255, 0.05);
+      --btn-secondary-gradient-end: rgba(255, 255, 255, 0.15);
+    }
+  }
+
+  .cta-title {
+    color: var(--cta-text-primary);
+  }
+
+  .cta-description {
+    color: var(--cta-text-secondary);
+  }
+
+  /* Unified Button Styles */
+  .cta-btn {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    padding: var(--btn-padding);
+    border-radius: var(--btn-radius);
+    font-weight: var(--btn-font-weight);
+    transition: transform 0.2s cubic-bezier(0.4, 0, 0.2, 1), box-shadow 0.2s cubic-bezier(0.4, 0, 0.2, 1), background-position 0.3s ease;
+    text-decoration: none;
+    cursor: pointer;
+    box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
+    background-size: 200% auto;
+  }
+  
+  .cta-btn-icon {
+    padding: var(--btn-icon-padding);
+    aspect-ratio: 1;
+  }
+  
+  .cta-btn-icon svg {
+    display: block;
+  }
+
+  .cta-btn-primary {
+    background-image: linear-gradient(90deg, var(--btn-primary-gradient-start) 0%, var(--btn-primary-gradient-end) 50%, var(--btn-primary-gradient-start) 100%);
+    color: var(--btn-primary-text);
+    border: 2px solid transparent; /* Keep box model consistent */
+  }
+
+  .cta-btn-primary:hover, .cta-btn-primary:focus-visible {
+    background-position: right center;
+    transform: translateY(-2px);
+    box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05);
+  }
+
+  .cta-btn-secondary {
+    background-image: linear-gradient(90deg, var(--btn-secondary-gradient-start) 0%, var(--btn-secondary-gradient-end) 50%, var(--btn-secondary-gradient-start) 100%);
+    color: var(--btn-secondary-text);
+    border: 2px solid var(--btn-secondary-border);
+    backdrop-filter: blur(4px);
+  }
+
+  .cta-btn-secondary:hover, .cta-btn-secondary:focus-visible {
+    background-position: right center;
+    transform: translateY(-2px);
+    box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05);
+  }
+</style>

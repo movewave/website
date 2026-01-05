@@ -1,0 +1,210 @@
+---
+export interface Props {
+  text: string;
+  speed?: number;
+  maxIterations?: number;
+  sequential?: boolean;
+  revealDirection?: 'start' | 'end' | 'center';
+  useOriginalCharsOnly?: boolean;
+  characters?: string;
+  className?: string;
+  animateOn?: 'view' | 'hover';
+  initialDelay?: number;
+}
+
+const {
+  text,
+  speed = 50,
+  maxIterations = 10,
+  sequential = false,
+  revealDirection = 'start',
+  useOriginalCharsOnly = false,
+  characters = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz!@#$%^&*()_+',
+  className = '',
+  animateOn = 'view',
+  initialDelay = 1000
+} = Astro.props;
+---
+
+<span class="decrypted-text-wrapper" data-text={text} data-speed={speed} data-max-iterations={maxIterations} data-sequential={sequential} data-reveal-direction={revealDirection} data-use-original-chars={useOriginalCharsOnly} data-characters={characters} data-animate-on={animateOn} data-initial-delay={initialDelay}>
+  <span class="sr-only">{text}</span>
+  <span class={`decrypted-display ${className}`} aria-hidden="true">{'*'.repeat(text.length)}</span>
+</span>
+
+<style>
+  .decrypted-text-wrapper {
+    display: inline-block;
+    white-space: pre-wrap;
+  }
+  
+  .sr-only {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    padding: 0;
+    margin: -1px;
+    overflow: hidden;
+    clip: rect(0,0,0,0);
+    border: 0;
+  }
+  
+  .decrypted-display {
+    display: inline-block;
+  }
+</style>
+
+<script>
+  class DecryptedTextController {
+    constructor(element) {
+      this.element = element;
+      this.displayElement = element.querySelector('.decrypted-display');
+      this.originalText = element.dataset.text || '';
+      this.speed = parseInt(element.dataset.speed || '50') || 50;
+      this.maxIterations = parseInt(element.dataset.maxIterations || '10') || 10;
+      this.sequential = element.dataset.sequential === 'true';
+      this.revealDirection = element.dataset.revealDirection || 'start';
+      this.useOriginalCharsOnly = element.dataset.useOriginalChars === 'true';
+      this.characters = element.dataset.characters || 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz!@#$%^&*()_+';
+      this.animateOn = element.dataset.animateOn || 'view';
+      this.initialDelay = parseInt(element.dataset.initialDelay || '1000') || 1000;
+      
+      this.isAnimating = false;
+      this.revealedIndices = new Set();
+      this.hasAnimated = false;
+      this.interval = null;
+      this.delayTimeout = null;
+      
+      // 初始显示星号
+      this.displayElement.textContent = '*'.repeat(this.originalText.length);
+      
+      this.init();
+    }
+    
+    init() {
+      if (this.animateOn === 'view') {
+        this.setupIntersectionObserver();
+      } else if (this.animateOn === 'hover') {
+        this.setupHoverEvents();
+      }
+    }
+    
+    setupIntersectionObserver() {
+      const observer = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+          if (entry.isIntersecting && !this.hasAnimated) {
+            this.startAnimationWithDelay();
+            this.hasAnimated = true;
+          }
+        });
+      }, {
+        threshold: 0.1
+      });
+      
+      observer.observe(this.element);
+    }
+    
+    setupHoverEvents() {
+      this.element.addEventListener('mouseenter', () => this.startAnimationWithDelay());
+      this.element.addEventListener('mouseleave', () => this.stopAnimation());
+    }
+    
+    startAnimationWithDelay() {
+      if (this.isAnimating || this.delayTimeout) return;
+      
+      this.delayTimeout = setTimeout(() => {
+        this.delayTimeout = null;
+        this.startAnimation();
+      }, this.initialDelay);
+    }
+    
+    startAnimation() {
+      if (this.isAnimating) return;
+      
+      this.isAnimating = true;
+      this.revealedIndices.clear();
+      let currentIteration = 0;
+      
+      const availableChars = this.useOriginalCharsOnly
+        ? Array.from(new Set(this.originalText.split(''))).filter(char => char !== ' ')
+        : this.characters.split('');
+      
+      this.interval = setInterval(() => {
+        if (this.sequential) {
+          if (this.revealedIndices.size < this.originalText.length) {
+            const nextIndex = this.getNextIndex();
+            this.revealedIndices.add(nextIndex);
+            this.updateDisplay(availableChars);
+          } else {
+            this.stopAnimation();
+          }
+        } else {
+          this.updateDisplay(availableChars);
+          currentIteration++;
+          if (currentIteration >= this.maxIterations) {
+            this.stopAnimation();
+          }
+        }
+      }, this.speed);
+    }
+    
+    stopAnimation() {
+      if (this.interval) {
+        clearInterval(this.interval);
+        this.interval = null;
+      }
+      if (this.delayTimeout) {
+        clearTimeout(this.delayTimeout);
+        this.delayTimeout = null;
+      }
+      this.isAnimating = false;
+      this.displayElement.textContent = this.originalText;
+    }
+    
+    getNextIndex() {
+      const textLength = this.originalText.length;
+      switch (this.revealDirection) {
+        case 'start':
+          return this.revealedIndices.size;
+        case 'end':
+          return textLength - 1 - this.revealedIndices.size;
+        case 'center': {
+          const middle = Math.floor(textLength / 2);
+          const offset = Math.floor(this.revealedIndices.size / 2);
+          const nextIndex = this.revealedIndices.size % 2 === 0
+            ? middle + offset
+            : middle - offset - 1;
+          
+          if (nextIndex >= 0 && nextIndex < textLength && !this.revealedIndices.has(nextIndex)) {
+            return nextIndex;
+          }
+          
+          for (let i = 0; i < textLength; i++) {
+            if (!this.revealedIndices.has(i)) return i;
+          }
+          return 0;
+        }
+        default:
+          return 0;
+      }
+    }
+    
+    updateDisplay(availableChars) {
+      const textArray = this.originalText.split('');
+      const displayText = textArray.map((char, index) => {
+        if (this.revealedIndices.has(index) || char === ' ') {
+          return char;
+        }
+        return availableChars[Math.floor(Math.random() * availableChars.length)];
+      }).join('');
+      
+      this.displayElement.textContent = displayText;
+    }
+  }
+
+  // 初始化所有 DecryptedText 实例
+  document.addEventListener('DOMContentLoaded', () => {
+    document.querySelectorAll('.decrypted-text-wrapper').forEach(element => {
+      new DecryptedTextController(element);
+    });
+  });
+</script>

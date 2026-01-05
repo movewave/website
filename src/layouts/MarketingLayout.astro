@@ -1,0 +1,96 @@
+---
+import { ClientRouter } from 'astro:transitions';
+import '../styles/global.css';
+
+interface Props {
+  title: string;
+  description?: string;
+}
+
+const { 
+  title, 
+  description = "Aptos Move Cookbook - Learn Move. Build Waves. 专注于 Aptos Move 开发的综合指南和资源平台"
+} = Astro.props;
+---
+
+<!doctype html>
+<html lang="zh-cn">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="description" content={description} />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <meta name="generator" content={Astro.generator} />
+    <title>{title}</title>
+    <ClientRouter />
+    
+    <!-- Preload critical resources -->
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet" />
+    
+    <!-- Open Graph -->
+    <meta property="og:title" content={title} />
+    <meta property="og:description" content={description} />
+    <meta property="og:type" content="website" />
+    <meta property="og:url" content={Astro.url} />
+    
+    <!-- Twitter Card -->
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content={title} />
+    <meta name="twitter:description" content={description} />
+  </head>
+  <body class="min-h-screen flex flex-col bg-white">
+    <a href="#main-content" class="skip-link">跳转到主要内容</a>
+    
+    <!-- Simple Header -->
+    <header class="bg-white border-b border-gray-200 sticky top-0 z-50">
+      <div class="container-custom">
+        <div class="flex items-center justify-between h-16">
+          <div class="flex items-center space-x-2">
+            <img src="/logo.svg" alt="Logo" class="h-64 w-64" />
+          </div>
+          <nav class="hidden md:flex items-center space-x-8">
+            <a href="https://cookbook.movewave.dev" class="text-gray-600 hover:text-payflo-purple transition-colors">开始学习</a>
+            <a href="https://cookbook.movewave.dev/quickstart" class="text-gray-600 hover:text-payflo-purple transition-colors">快速开始</a>
+            <a href="#" class="text-gray-600 hover:text-payflo-purple transition-colors">视频</a>
+            <a href="#" class="text-gray-600 hover:text-payflo-purple transition-colors">参考</a>
+          </nav>
+        </div>
+      </div>
+    </header>
+    
+    <main id="main-content" class="flex-grow">
+      <slot />
+    </main>
+    
+    <!-- Simple Footer -->
+    <footer class="bg-gray-50 border-t border-gray-200">
+      <div class="container-custom py-12">
+        <div class="mt-8 pt-8 border-t border-gray-200 text-center text-gray-600">
+          <p>&copy; 2026 MoveWave 保留所有权利</p>
+        </div>
+      </div>
+    </footer>
+    
+    <!-- Intersection Observer for animations on scroll -->
+    <script>
+      document.addEventListener('astro:page-load', () => {
+        const animatedElements = document.querySelectorAll('.animate-on-scroll');
+        
+        const observer = new IntersectionObserver((entries) => {
+          entries.forEach(entry => {
+            if (entry.isIntersecting) {
+              entry.target.classList.add('animated');
+              observer.unobserve(entry.target);
+            }
+          });
+        }, { threshold: 0.1 });
+        
+        animatedElements.forEach(element => {
+          observer.observe(element);
+        });
+      });
+    </script>
+  </body>
+</html>
