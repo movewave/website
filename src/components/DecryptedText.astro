@@ -201,10 +201,30 @@ const {
     }
   }
 
+  // Store instances to clean up on navigation
+  const instances = new Set();
+
   // 初始化所有 DecryptedText 实例
-  document.addEventListener('DOMContentLoaded', () => {
+  function initDecryptedText() {
+    // Clean up existing instances first
+    instances.forEach(instance => instance.stopAnimation());
+    instances.clear();
+
     document.querySelectorAll('.decrypted-text-wrapper').forEach(element => {
-      new DecryptedTextController(element);
+      try {
+        instances.add(new DecryptedTextController(element));
+      } catch (error) {
+        console.error('Failed to initialize DecryptedText:', error);
+      }
     });
+  }
+
+  // Handle initial load and view transitions
+  document.addEventListener('astro:page-load', initDecryptedText);
+  
+  // Clean up on unmount/navigation
+  document.addEventListener('astro:before-swap', () => {
+    instances.forEach(instance => instance.stopAnimation());
+    instances.clear();
   });
 </script>

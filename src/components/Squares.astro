@@ -20,7 +20,16 @@ const {
 const maxHeightCSS = maxHeight ? `${maxHeight}px` : '100%';
 ---
 
-<canvas id="squares-canvas" class="squares-canvas"></canvas>
+<canvas 
+  id="squares-canvas" 
+  class="squares-canvas"
+  data-direction={direction}
+  data-speed={speed}
+  data-border-color={borderColor}
+  data-square-size={squareSize}
+  data-hover-fill-color={hoverFillColor}
+  data-max-height={maxHeight}
+></canvas>
 
 <style define:vars={{ maxHeightCSS }}>
   .squares-canvas {
@@ -38,12 +47,10 @@ const maxHeightCSS = maxHeight ? `${maxHeight}px` : '100%';
   }
 </style>
 
-<script define:vars={{ direction, speed, borderColor, squareSize, hoverFillColor, maxHeight }}>
+<script>
   class SquaresBackground {
-    constructor() {
-      this.canvas = document.getElementById('squares-canvas');
-      if (!this.canvas) return;
-      
+    constructor(canvas) {
+      this.canvas = canvas;
       this.ctx = this.canvas.getContext('2d');
       this.requestRef = null;
       this.numSquaresX = 0;
@@ -51,50 +58,61 @@ const maxHeightCSS = maxHeight ? `${maxHeight}px` : '100%';
       this.gridOffset = { x: 0, y: 0 };
       this.hoveredSquare = null;
       
+      // Read config from data attributes
+      this.direction = this.canvas.dataset.direction || 'right';
+      this.speed = parseFloat(this.canvas.dataset.speed || '1');
+      this.borderColor = this.canvas.dataset.borderColor || '#999';
+      this.squareSize = parseFloat(this.canvas.dataset.squareSize || '40');
+      this.hoverFillColor = this.canvas.dataset.hoverFillColor || '#222';
+      const maxHeightStr = this.canvas.dataset.maxHeight;
+      this.maxHeight = maxHeightStr ? parseFloat(maxHeightStr) : undefined;
+
       this.init();
     }
     
     init() {
       this.resizeCanvas();
-      window.addEventListener('resize', () => this.resizeCanvas());
+      this.resizeHandler = () => this.resizeCanvas();
+      window.addEventListener('resize', this.resizeHandler);
       this.canvas.addEventListener('mousemove', (e) => this.handleMouseMove(e));
       this.canvas.addEventListener('mouseleave', () => this.handleMouseLeave());
       this.animate();
     }
     
     resizeCanvas() {
+      if (!this.canvas) return;
       this.canvas.width = this.canvas.offsetWidth;
-      const actualHeight = maxHeight || this.canvas.offsetHeight;
+      const actualHeight = this.maxHeight || this.canvas.offsetHeight;
       this.canvas.height = actualHeight;
-      this.numSquaresX = Math.ceil(this.canvas.width / squareSize) + 1;
-      this.numSquaresY = Math.ceil(actualHeight / squareSize) + 1;
+      this.numSquaresX = Math.ceil(this.canvas.width / this.squareSize) + 1;
+      this.numSquaresY = Math.ceil(actualHeight / this.squareSize) + 1;
     }
     
     drawGrid() {
       if (!this.ctx) return;
       this.ctx.clearRect(0, 0, this.canvas.width, this.canvas.height);
       
-      const startX = Math.floor(this.gridOffset.x / squareSize) * squareSize;
-      const startY = Math.floor(this.gridOffset.y / squareSize) * squareSize;
+      const startX = Math.floor(this.gridOffset.x / this.squareSize) * this.squareSize;
+      const startY = Math.floor(this.gridOffset.y / this.squareSize) * this.squareSize;
       
-      const maxDrawHeight = maxHeight || this.canvas.height;
+      const maxDrawHeight = this.maxHeight || this.canvas.height;
       
-      for (let x = startX; x < this.canvas.width + squareSize; x += squareSize) {
-        for (let y = startY; y < maxDrawHeight + squareSize; y += squareSize) {
-          const squareX = x - (this.gridOffset.x % squareSize);
-          const squareY = y - (this.gridOffset.y % squareSize);
+      for (let x = startX; x < this.canvas.width + this.squareSize; x += this.squareSize) {
+        for (let y = startY; y < maxDrawHeight + this.squareSize; y += this.squareSize) {
+          const squareX = x - (this.gridOffset.x % this.squareSize);
+          const squareY = y - (this.gridOffset.y % this.squareSize);
           
           if (
             this.hoveredSquare &&
-            Math.floor((x - startX) / squareSize) === this.hoveredSquare.x &&
-            Math.floor((y - startY) / squareSize) === this.hoveredSquare.y
+            Math.floor((x - startX) / this.squareSize) === this.hoveredSquare.x &&
+            Math.floor((y - startY) / this.squareSize) === this.hoveredSquare.y
           ) {
-            this.ctx.fillStyle = hoverFillColor;
-            this.ctx.fillRect(squareX, squareY, squareSize, squareSize);
+            this.ctx.fillStyle = this.hoverFillColor;
+            this.ctx.fillRect(squareX, squareY, this.squareSize, this.squareSize);
           }
           
-          this.ctx.strokeStyle = borderColor;
-          this.ctx.strokeRect(squareX, squareY, squareSize, squareSize);
+          this.ctx.strokeStyle = this.borderColor;
+          this.ctx.strokeRect(squareX, squareY, this.squareSize, this.squareSize);
         }
       }
       
@@ -115,23 +133,23 @@ const maxHeightCSS = maxHeight ? `${maxHeight}px` : '100%';
     }
     
     updateAnimation() {
-      const effectiveSpeed = Math.max(speed, 0.1);
-      switch (direction) {
+      const effectiveSpeed = Math.max(this.speed, 0.1);
+      switch (this.direction) {
         case "right":
-          this.gridOffset.x = (this.gridOffset.x - effectiveSpeed + squareSize) % squareSize;
+          this.gridOffset.x = (this.gridOffset.x - effectiveSpeed + this.squareSize) % this.squareSize;
           break;
         case "left":
-          this.gridOffset.x = (this.gridOffset.x + effectiveSpeed + squareSize) % squareSize;
+          this.gridOffset.x = (this.gridOffset.x + effectiveSpeed + this.squareSize) % this.squareSize;
           break;
         case "up":
-          this.gridOffset.y = (this.gridOffset.y + effectiveSpeed + squareSize) % squareSize;
+          this.gridOffset.y = (this.gridOffset.y + effectiveSpeed + this.squareSize) % this.squareSize;
           break;
         case "down":
-          this.gridOffset.y = (this.gridOffset.y - effectiveSpeed + squareSize) % squareSize;
+          this.gridOffset.y = (this.gridOffset.y - effectiveSpeed + this.squareSize) % this.squareSize;
           break;
         case "diagonal":
-          this.gridOffset.x = (this.gridOffset.x - effectiveSpeed + squareSize) % squareSize;
-          this.gridOffset.y = (this.gridOffset.y - effectiveSpeed + squareSize) % squareSize;
+          this.gridOffset.x = (this.gridOffset.x - effectiveSpeed + this.squareSize) % this.squareSize;
+          this.gridOffset.y = (this.gridOffset.y - effectiveSpeed + this.squareSize) % this.squareSize;
           break;
       }
       
@@ -148,11 +166,11 @@ const maxHeightCSS = maxHeight ? `${maxHeight}px` : '100%';
       const mouseX = event.clientX - rect.left;
       const mouseY = event.clientY - rect.top;
       
-      const startX = Math.floor(this.gridOffset.x / squareSize) * squareSize;
-      const startY = Math.floor(this.gridOffset.y / squareSize) * squareSize;
+      const startX = Math.floor(this.gridOffset.x / this.squareSize) * this.squareSize;
+      const startY = Math.floor(this.gridOffset.y / this.squareSize) * this.squareSize;
       
-      const hoveredSquareX = Math.floor((mouseX + this.gridOffset.x - startX) / squareSize);
-      const hoveredSquareY = Math.floor((mouseY + this.gridOffset.y - startY) / squareSize);
+      const hoveredSquareX = Math.floor((mouseX + this.gridOffset.x - startX) / this.squareSize);
+      const hoveredSquareY = Math.floor((mouseY + this.gridOffset.y - startY) / this.squareSize);
       
       if (
         !this.hoveredSquare ||
@@ -171,21 +189,40 @@ const maxHeightCSS = maxHeight ? `${maxHeight}px` : '100%';
       if (this.requestRef) {
         cancelAnimationFrame(this.requestRef);
       }
-      window.removeEventListener('resize', () => this.resizeCanvas());
+      if (this.resizeHandler) {
+        window.removeEventListener('resize', this.resizeHandler);
+      }
     }
   }
   
+  let squaresInstance = null;
+
   // Initialize the squares background
   function initSquares() {
-    if (document.getElementById('squares-canvas')) {
-      new SquaresBackground();
+    // Cleanup existing instance
+    if (squaresInstance) {
+      squaresInstance.destroy();
+      squaresInstance = null;
+    }
+
+    const canvas = document.getElementById('squares-canvas');
+    if (canvas) {
+      try {
+        squaresInstance = new SquaresBackground(canvas);
+      } catch (error) {
+        console.error('Failed to initialize SquaresBackground:', error);
+      }
     }
   }
   
-  // Initialize when DOM is ready
-  if (document.readyState === 'loading') {
-    document.addEventListener('DOMContentLoaded', initSquares);
-  } else {
-    initSquares();
-  }
+  // Initialize on page load (including view transitions)
+  document.addEventListener('astro:page-load', initSquares);
+  
+  // Cleanup on before swap
+  document.addEventListener('astro:before-swap', () => {
+    if (squaresInstance) {
+      squaresInstance.destroy();
+      squaresInstance = null;
+    }
+  });
 </script>
