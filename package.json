@@ -9,8 +9,7 @@
     "preview": "astro preview",
     "check": "astro check",
     "format": "prettier -w . --cache --plugin-search-dir=.",
-    "lint": "eslint .",
-    "deploy": "wrangler pages deploy dist"
+    "lint": "eslint ."
   },
   "devDependencies": {
     "@astrojs/tailwind": "^6.0.2",
