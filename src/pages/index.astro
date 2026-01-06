@@ -6,7 +6,7 @@ import Squares from '../components/Squares.astro';
 import DecryptedText from '../components/DecryptedText.astro';
 ---
 
-<MarketingLayout title="MoveWave - Aptos Move 开发门户">
+<MarketingLayout title="MoveWave - Aptos Move 开发社区">
   <!-- Hero Section -->
   <section class="pt-20 pb-16 md:pt-24 md:pb-20 overflow-hidden relative bg-transparent">
     <Squares 
@@ -190,40 +190,218 @@ import DecryptedText from '../components/DecryptedText.astro';
   <section class="py-20 bg-gray-50">
     <div class="container-custom">
       <div class="text-center mb-16">
-        <h2 class="text-3xl font-bold text-gray-900">实战场景</h2>
-        <p class="mt-4 text-gray-600">从理论到实践，MoveWave 涵盖了 Web3 开发的核心赛道。</p>
+        <h2 class="text-3xl font-bold text-gray-900">Aptos Move 智能合约应用场景</h2>
+        <p class="mt-4 text-gray-600">从 DeFi 到 DAO，探索 Move 语言在 Web3 核心领域的无限潜能。</p>
       </div>
       
       <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-        <!-- Card 1 -->
-        <a href="https://cookbook.movewave.dev/chapters/chapter-6" class="group block bg-white rounded-xl overflow-hidden shadow-sm hover:shadow-xl transition-all duration-300 transform hover:-translate-y-1">
-          <div class="h-2 bg-gradient-to-r from-pink-500 to-rose-500"></div>
-          <div class="p-6">
-            <h3 class="font-bold text-xl text-gray-900 group-hover:text-rose-600 transition-colors mb-2">同质化代币 (FA)</h3>
-            <p class="text-sm text-gray-600 mb-4">基于 Aptos Fungible Asset 标准，构建下一代 DeFi 协议与 MEME 币。</p>
-            <span class="text-xs font-mono bg-gray-100 text-gray-600 px-2 py-1 rounded">DeFi</span>
+        <!-- Scenario 1: DeFi -->
+        <div class="bg-white rounded-xl overflow-hidden shadow-sm hover:shadow-xl transition-all duration-300 border border-gray-100 flex flex-col">
+          <div class="h-1 bg-gradient-to-r from-green-400 to-emerald-500"></div>
+          <div class="p-6 flex-1 flex flex-col">
+            <div class="flex justify-between items-start mb-4">
+               <h3 class="font-bold text-xl text-gray-900">去中心化金融 (DeFi)</h3>
+               <span class="text-xs font-mono bg-green-50 text-green-700 px-2 py-1 rounded">Finance</span>
+            </div>
+            
+            <div class="space-y-4 flex-1">
+              <div>
+                <h4 class="text-xs font-bold text-gray-500 uppercase tracking-wide mb-1">业务需求</h4>
+                <p class="text-sm text-gray-600">高频交易、闪电贷、资产安全与原子性。</p>
+              </div>
+              
+              <div>
+                <h4 class="text-xs font-bold text-gray-500 uppercase tracking-wide mb-1">Move 优势</h4>
+                <p class="text-sm text-gray-600">线性类型防止资产丢失；Block-STM 引擎支持亚秒级并行交易。</p>
+              </div>
+            </div>
           </div>
-        </a>
+        </div>
 
-        <!-- Card 2 -->
-        <a href="https://cookbook.movewave.dev/chapters/chapter-7" class="group block bg-white rounded-xl overflow-hidden shadow-sm hover:shadow-xl transition-all duration-300 transform hover:-translate-y-1">
-          <div class="h-2 bg-gradient-to-r from-purple-500 to-indigo-500"></div>
-          <div class="p-6">
-            <h3 class="font-bold text-xl text-gray-900 group-hover:text-indigo-600 transition-colors mb-2">数字资产 (NFT)</h3>
-            <p class="text-sm text-gray-600 mb-4">掌握 Digital Asset 标准，实现批量铸造、灵魂绑定与可组合 NFT。</p>
-            <span class="text-xs font-mono bg-gray-100 text-gray-600 px-2 py-1 rounded">GameFi</span>
+        <!-- Scenario 2: NFT -->
+        <div class="bg-white rounded-xl overflow-hidden shadow-sm hover:shadow-xl transition-all duration-300 border border-gray-100 flex flex-col">
+          <div class="h-1 bg-gradient-to-r from-purple-400 to-indigo-500"></div>
+          <div class="p-6 flex-1 flex flex-col">
+            <div class="flex justify-between items-start mb-4">
+               <h3 class="font-bold text-xl text-gray-900">NFT 平台</h3>
+               <span class="text-xs font-mono bg-purple-50 text-purple-700 px-2 py-1 rounded">Digital Asset</span>
+            </div>
+            
+            <div class="space-y-4 flex-1">
+              <div>
+                <h4 class="text-xs font-bold text-gray-500 uppercase tracking-wide mb-1">业务需求</h4>
+                <p class="text-sm text-gray-600">版税强制执行、灵魂绑定、资产可组合性。</p>
+              </div>
+              
+              <div>
+                <h4 class="text-xs font-bold text-gray-500 uppercase tracking-wide mb-1">Move 优势</h4>
+                <p class="text-sm text-gray-600">Object 模型允许 NFT 拥有其他资产（如装备），实现真正的可组合性。</p>
+              </div>
+            </div>
           </div>
-        </a>
+        </div>
 
-        <!-- Card 3 -->
-        <a href="https://cookbook.movewave.dev/chapters/chapter-8" class="group block bg-white rounded-xl overflow-hidden shadow-sm hover:shadow-xl transition-all duration-300 transform hover:-translate-y-1">
-          <div class="h-2 bg-gradient-to-r from-cyan-500 to-blue-500"></div>
-          <div class="p-6">
-            <h3 class="font-bold text-xl text-gray-900 group-hover:text-blue-600 transition-colors mb-2">去中心化应用 (dApp)</h3>
-            <p class="text-sm text-gray-600 mb-4">整合前端与合约，构建功能完整的众筹平台与 DAO 治理系统。</p>
-            <span class="text-xs font-mono bg-gray-100 text-gray-600 px-2 py-1 rounded">SocialFi</span>
+        <!-- Scenario 3: RWA -->
+        <div class="bg-white rounded-xl overflow-hidden shadow-sm hover:shadow-xl transition-all duration-300 border border-gray-100 flex flex-col">
+          <div class="h-1 bg-gradient-to-r from-amber-400 to-yellow-500"></div>
+          <div class="p-6 flex-1 flex flex-col">
+            <div class="flex justify-between items-start mb-4">
+               <h3 class="font-bold text-xl text-gray-900">现实世界资产 (RWA)</h3>
+               <span class="text-xs font-mono bg-amber-50 text-amber-700 px-2 py-1 rounded">Assets</span>
+            </div>
+            
+            <div class="space-y-4 flex-1">
+              <div>
+                <h4 class="text-xs font-bold text-gray-500 uppercase tracking-wide mb-1">业务需求</h4>
+                <p class="text-sm text-gray-600">传统资产上链确权，实现合规的碎片化交易与全球流动性。</p>
+              </div>
+              
+              <div>
+                <h4 class="text-xs font-bold text-gray-500 uppercase tracking-wide mb-1">Move 优势</h4>
+                <p class="text-sm text-gray-600">标准化资产定义简化 DeFi 集成；合约层强制执行合规审查逻辑。</p>
+              </div>
+            </div>
           </div>
-        </a>
+        </div>
+
+        <!-- Scenario 4: Payment -->
+        <div class="bg-white rounded-xl overflow-hidden shadow-sm hover:shadow-xl transition-all duration-300 border border-gray-100 flex flex-col">
+          <div class="h-1 bg-gradient-to-r from-pink-400 to-rose-500"></div>
+          <div class="p-6 flex-1 flex flex-col">
+            <div class="flex justify-between items-start mb-4">
+               <h3 class="font-bold text-xl text-gray-900">消费与跨境支付</h3>
+               <span class="text-xs font-mono bg-pink-50 text-pink-700 px-2 py-1 rounded">Payment</span>
+            </div>
+            
+            <div class="space-y-4 flex-1">
+              <div>
+                <h4 class="text-xs font-bold text-gray-500 uppercase tracking-wide mb-1">业务需求</h4>
+                <p class="text-sm text-gray-600">解决跨境支付高手续费与低效率痛点，提供流畅支付体验。</p>
+              </div>
+              
+              <div>
+                <h4 class="text-xs font-bold text-gray-500 uppercase tracking-wide mb-1">Move 优势</h4>
+                <p class="text-sm text-gray-600">高 TPS 实现秒级确认；账户抽象技术消除用户 Gas 门槛。</p>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Scenario 5: GameFi -->
+        <div class="bg-white rounded-xl overflow-hidden shadow-sm hover:shadow-xl transition-all duration-300 border border-gray-100 flex flex-col">
+          <div class="h-1 bg-gradient-to-r from-orange-400 to-red-500"></div>
+          <div class="p-6 flex-1 flex flex-col">
+            <div class="flex justify-between items-start mb-4">
+               <h3 class="font-bold text-xl text-gray-900">游戏资产管理</h3>
+               <span class="text-xs font-mono bg-orange-50 text-orange-700 px-2 py-1 rounded">Gaming</span>
+            </div>
+            
+            <div class="space-y-4 flex-1">
+              <div>
+                <h4 class="text-xs font-bold text-gray-500 uppercase tracking-wide mb-1">业务需求</h4>
+                <p class="text-sm text-gray-600">装备升级、属性动态变化、高并发交互。</p>
+              </div>
+              
+              <div>
+                <h4 class="text-xs font-bold text-gray-500 uppercase tracking-wide mb-1">Move 优势</h4>
+                <p class="text-sm text-gray-600">动态字段 (Dynamic Fields) 允许运行时添加属性；高吞吐量支撑万人在线。</p>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Scenario 6: Prediction Market -->
+        <div class="bg-white rounded-xl overflow-hidden shadow-sm hover:shadow-xl transition-all duration-300 border border-gray-100 flex flex-col">
+          <div class="h-1 bg-gradient-to-r from-cyan-400 to-blue-500"></div>
+          <div class="p-6 flex-1 flex flex-col">
+            <div class="flex justify-between items-start mb-4">
+               <h3 class="font-bold text-xl text-gray-900">预测市场</h3>
+               <span class="text-xs font-mono bg-cyan-50 text-cyan-700 px-2 py-1 rounded">Market</span>
+            </div>
+            
+            <div class="space-y-4 flex-1">
+              <div>
+                <h4 class="text-xs font-bold text-gray-500 uppercase tracking-wide mb-1">业务需求</h4>
+                <p class="text-sm text-gray-600">利用市场博弈发现真实信息，构建公平透明的事件预测平台。</p>
+              </div>
+              
+              <div>
+                <h4 class="text-xs font-bold text-gray-500 uppercase tracking-wide mb-1">Move 优势</h4>
+                <p class="text-sm text-gray-600">全链上订单薄提供即时交易深度；智能合约保障资金自动清算。</p>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Scenario 7: DID -->
+        <div class="bg-white rounded-xl overflow-hidden shadow-sm hover:shadow-xl transition-all duration-300 border border-gray-100 flex flex-col">
+          <div class="h-1 bg-gradient-to-r from-indigo-400 to-violet-500"></div>
+          <div class="p-6 flex-1 flex flex-col">
+            <div class="flex justify-between items-start mb-4">
+               <h3 class="font-bold text-xl text-gray-900">去中心化身份 (DID)</h3>
+               <span class="text-xs font-mono bg-indigo-50 text-indigo-700 px-2 py-1 rounded">Identity</span>
+            </div>
+            
+            <div class="space-y-4 flex-1">
+              <div>
+                <h4 class="text-xs font-bold text-gray-500 uppercase tracking-wide mb-1">业务需求</h4>
+                <p class="text-sm text-gray-600">打破数据孤岛，构建用户自主掌控且隐私安全的通用数字身份。</p>
+              </div>
+              
+              <div>
+                <h4 class="text-xs font-bold text-gray-500 uppercase tracking-wide mb-1">Move 优势</h4>
+                <p class="text-sm text-gray-600">灵魂绑定对象确立身份唯一性；资源模型实现精细化隐私授权。</p>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Scenario 8: DAO -->
+        <div class="bg-white rounded-xl overflow-hidden shadow-sm hover:shadow-xl transition-all duration-300 border border-gray-100 flex flex-col">
+          <div class="h-1 bg-gradient-to-r from-blue-400 to-cyan-500"></div>
+          <div class="p-6 flex-1 flex flex-col">
+            <div class="flex justify-between items-start mb-4">
+               <h3 class="font-bold text-xl text-gray-900">DAO 治理</h3>
+               <span class="text-xs font-mono bg-blue-50 text-blue-700 px-2 py-1 rounded">Governance</span>
+            </div>
+            
+            <div class="space-y-4 flex-1">
+              <div>
+                <h4 class="text-xs font-bold text-gray-500 uppercase tracking-wide mb-1">业务需求</h4>
+                <p class="text-sm text-gray-600">多签金库、提案投票、链上自动执行。</p>
+              </div>
+              
+              <div>
+                <h4 class="text-xs font-bold text-gray-500 uppercase tracking-wide mb-1">Move 优势</h4>
+                <p class="text-sm text-gray-600">原生多签账户支持；Capability 模式实现精细化权限控制。</p>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Scenario 5: Supply Chain -->
+        <div class="bg-white rounded-xl overflow-hidden shadow-sm hover:shadow-xl transition-all duration-300 border border-gray-100 flex flex-col">
+          <div class="h-1 bg-gradient-to-r from-teal-400 to-cyan-500"></div>
+          <div class="p-6 flex-1 flex flex-col">
+            <div class="flex justify-between items-start mb-4">
+               <h3 class="font-bold text-xl text-gray-900">供应链溯源</h3>
+               <span class="text-xs font-mono bg-teal-50 text-teal-700 px-2 py-1 rounded">Enterprise</span>
+            </div>
+            
+            <div class="space-y-4 flex-1">
+              <div>
+                <h4 class="text-xs font-bold text-gray-500 uppercase tracking-wide mb-1">业务需求</h4>
+                <p class="text-sm text-gray-600">全流程透明、数据不可篡改、多方协作。</p>
+              </div>
+              
+              <div>
+                <h4 class="text-xs font-bold text-gray-500 uppercase tracking-wide mb-1">Move 优势</h4>
+                <p class="text-sm text-gray-600">全局存储结构便于索引；模块化权限控制确保数据更新安全。</p>
+              </div>
+            </div>
+          </div>
+        </div>
+
       </div>
     </div>
   </section>
