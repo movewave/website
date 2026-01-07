@@ -62,8 +62,12 @@ import DecryptedText from '../components/DecryptedText.astro';
       <div class="mt-16 pt-8 border-t border-gray-100 animate-on-scroll delay-3">
         <p class="text-center text-sm text-gray-400 mb-6 font-medium tracking-wide uppercase">Partners</p>
         <div class="flex flex-wrap justify-center items-center gap-6 md:gap-10 opacity-70 grayscale hover:grayscale-0 transition-all duration-500">
-          <img src={aptosLogo.src} alt="Aptos" class="h-6 w-28 md:h-7 md:w-32 object-contain" />
-          <img src={movemakerLogo.src} alt="MoveMaker" class="h-8 w-36 md:h-10 md:w-44 object-contain" />
+          <a href="https://aptoslabs.com/" target="_blank" rel="noopener noreferrer">
+            <img src={aptosLogo.src} alt="Aptos" class="h-6 w-28 md:h-7 md:w-32 object-contain" />
+          </a>
+          <a href="https://www.movemaker.xyz" target="_blank" rel="noopener noreferrer">
+            <img src={movemakerLogo.src} alt="MoveMaker" class="h-8 w-36 md:h-10 md:w-44 object-contain" />
+          </a>
         </div>
       </div>
     </div>
@@ -143,7 +147,7 @@ import DecryptedText from '../components/DecryptedText.astro';
               </div>
             </div>
             <div class="mt-8">
-               <a href="https://cookbook.movewave.dev/chapters/chapter-2" class="text-payflo-purple font-medium hover:underline inline-flex items-center gap-1">
+               <a href="https://cookbook.movewave.dev/chapters/chapter2" target="_blank" class="text-payflo-purple font-medium hover:underline inline-flex items-center gap-1">
                  深入了解 Move 语法 <span aria-hidden="true">&rarr;</span>
                </a>
             </div>
@@ -412,7 +416,7 @@ import DecryptedText from '../components/DecryptedText.astro';
     <div class="absolute bottom-0 left-0 w-64 h-64 bg-blue-500 rounded-full mix-blend-multiply filter blur-3xl opacity-20 animate-blob animation-delay-2000"></div>
     
     <div class="container-custom relative text-center">
-      <h2 class="text-3xl md:text-5xl font-bold mb-6 cta-title">准备好烹饪你的第一个合约了吗？</h2>
+      <h2 class="text-3xl md:text-5xl font-bold mb-6 cta-title">准备好烹饪你的第一个智能合约了吗？</h2>
       <p class="text-xl mb-10 max-w-4xl mx-auto cta-description">
         加入 MoveWave 社区，按照我们的"食谱"指引，从零基础晋升为 Move 开发专家。
       </p>
